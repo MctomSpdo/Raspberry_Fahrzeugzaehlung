@@ -1,0 +1,20 @@
+ Projekt Beschreibung
+  - Deckblatt
+  - Ausgangslage / Überblick über das Thema
+  - Ziele und Nichtziele
+  - Präzise Themenbeschreibung 
+  - Verwendete Technologien
+  - Teamzusammensetzung (Projektleiter muss definiert werden)
+  - Zeitplan als Tabelle (nur Meilensteine)
+  - Link zu Github Repo
+
+Von uns vorgegebene Technologien
+SW
+- OpenCV: https://opencv.org/
+- Java Framework: highChart oder chartJS
+- Docker: www.docker.com
+
+HW
+- Raspberry PI
+- Raspberry PI Webcam https://at.rs-online.com/web/p/raspberry-pi-kameras/9132664/
+- Raspberry PI IR Cam https://at.rs-online.com/web/p/raspberry-pi-kameras/9132673/
