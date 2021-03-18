@@ -14,11 +14,11 @@ Das Projekt zählt Fahrzeuge, und unterscheidet davon zwischen LKW und PKW. Dies
 •	Funktionierendes System in der Dunkelheit (aufgrund Kamera)
 •	Verbauen von anderen Bauteilen (Sensoren, ….)
 ## **Verwendete Technologien:**
-**1. ### Hardware:**
-*Raspberry Pi
+ ### **Hardware:**
+*	Raspberry Pi
 *	Kamera
 *	(Netzwerk)
-**2. ###	Software:** 
+ ###Software:** 
 *	Raspberry Pi Os / Linux / Docker
 *	OpenCv
 *	Java Framework (highChart of chartJS)
