@@ -18,7 +18,7 @@ Das Projekt zählt Fahrzeuge, und unterscheidet davon zwischen LKW und PKW. Dies
 *	Raspberry Pi
 *	Kamera
 *	(Netzwerk)
- ###Software:** 
+ ### **Software:** 
 *	Raspberry Pi Os / Linux / Docker
 *	OpenCv
 *	Java Framework (highChart of chartJS)
