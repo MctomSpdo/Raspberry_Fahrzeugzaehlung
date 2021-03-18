@@ -5,14 +5,14 @@ Raspberry Fahrzeugzählung GitHub rep
 
 Das Projekt zählt Fahrzeuge, und unterscheidet davon zwischen LKW und PKW. Diese Daten werden dann auf einer Benutzeroberfläche ausgegeben. 
 ## **Die Ziele des Projektes:**
-•	Zählen von Fahrzeugen mithilfe einer Kamera
-•	Präsentieren der Daten auf einer Weboberfläche
-•	Fahrzeugtypen voneinander unterscheiden
-•	Läuft in einen Docker Container
+*	Zählen von Fahrzeugen mithilfe einer Kamera
+*	Präsentieren der Daten auf einer Weboberfläche
+*	Fahrzeugtypen voneinander unterscheiden
+*	Läuft in einen Docker Container
 ## **Nichtziele des Projektes:**
-•	Geld machen
-•	Funktionierendes System in der Dunkelheit (aufgrund Kamera)
-•	Verbauen von anderen Bauteilen (Sensoren, ….)
+*	Geld machen
+*	Funktionierendes System in der Dunkelheit (aufgrund Kamera)
+*	Verbauen von anderen Bauteilen (Sensoren, ….)
 ## **Verwendete Technologien:**
  ### **Hardware:**
 *	Raspberry Pi
