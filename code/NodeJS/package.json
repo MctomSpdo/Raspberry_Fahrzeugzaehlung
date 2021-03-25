@@ -1,0 +1,20 @@
+{
+  "name": "ava_webhost",
+  "version": "1.0.0",
+  "description": "NodeJS Serve for the Ava Project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/MctomSpdo/Raspberry_Fahrzeugzaehlung.git"
+  },
+  "author": "Sebastian T, Paul S, Thoams S",
+  "license": "ISC / Open for use",
+  "bugs": {
+    "url": "https://github.com/MctomSpdo/Raspberry_Fahrzeugzaehlung/issues"
+  },
+  "homepage": "https://github.com/MctomSpdo/Raspberry_Fahrzeugzaehlung#readme"
+}
