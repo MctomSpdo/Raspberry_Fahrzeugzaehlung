@@ -27,7 +27,7 @@ Das Projekt zählt Fahrzeuge, und unterscheidet davon zwischen LKW und PKW. Dies
 *	Html / Css (If webserver)
 ## **Teamszusammensetzung:**
 *	Teamleitung: Sebastian Toldo
-* Mitglieder: Paul Schicklgruber, Thomas Spindler
+* Mitglieder: Paul Schicklgruber, Thomas Spindler, Boris Ballada
 ## **Zeitplan:** 
 Bis 18.3	Raspberry einrichten 
 24.3- Abgabe	Beginn des Developments
