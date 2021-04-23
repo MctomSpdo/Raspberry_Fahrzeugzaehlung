@@ -24,7 +24,7 @@ Das Projekt zählt Fahrzeuge, und unterscheidet davon zwischen LKW und PKW. Dies
 *	Java Framework (highChart of chartJS)
 *	Docker
 *	(JavaScript (NodeJS))
-*	Html / Css (If webserver)
+*	Html / Css
 ## **Teamszusammensetzung:**
 *	Teamleitung: Sebastian Toldo
 * Mitglieder: Paul Schicklgruber, Thomas Spindler, Boris Ballada
