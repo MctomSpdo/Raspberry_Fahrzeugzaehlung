@@ -4,7 +4,7 @@ const express = require('express');
 const fs = require('fs');
 
 const app = express();
-const port = 80; //default WebPort
+const port = 8080; //default WebPort
 
 app.use(express.static('public-root/webserver-root'), express.urlencoded({extended: true}));
 
@@ -28,3 +28,4 @@ app.get('/API/version', (req, res) => {
 app.use((req, res, next) => {//404 page Error (https://expressjs.com/en/starter/faq.html)
     res.status(404).send(fs.readFileSync('./public-root/webserver-root/404.html', 'utf8'));
 });
+
