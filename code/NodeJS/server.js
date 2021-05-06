@@ -4,7 +4,7 @@ const express = require('express');
 const fs = require('fs');
 
 const app = express();
-const port = 8080; //default WebPort
+const port = 3000; //default WebPort
 
 app.use(express.static('public-root/webserver-root'), express.urlencoded({extended: true}));
 
