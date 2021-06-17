@@ -7,8 +7,17 @@ import numpy
 
 lastimg = 0;
 
-
-while True:
+#return the difference between the image and the last Image
+def imgDiff(image):
+        diff = 0;
+        diff = cv2.absdiff(gray, lastimg, diff);
+        
+        ret, thresh = cv2.threshold(diff, 30, 255, cv2.THRESH_BINARY_INV)
+        
+        return thresh;
+    
+#makes an Image from the camera
+def getImg():
         #Create a memory stream so photos doesn't need to be saved in a file
         stream = io.BytesIO()
 
@@ -22,36 +31,27 @@ while True:
 
         #Now creates an OpenCV image
         image = cv2.imdecode(buff, 1)
+        return image;
 
+#roatetes the Image by 180 degrees
+def rotate180(image):
         image = cv2.rotate(image, cv2.ROTATE_90_CLOCKWISE)
         image = cv2.rotate(image, cv2.ROTATE_90_CLOCKWISE)
+        return image
 
-        #Convert to grayscale
-        gray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
-
-        #Convert to update of Image
-        diff = 0;
-        diff = cv2.absdiff(gray, lastimg, diff);
+while True:
+        image = rotate180(getImg());
         
-        #Make the difference bigger (0 or 255);
-        thresh = 0;
-        cv2.threshold(diff, thresh, 0, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU);
-    
-        #Claculate Vectors
-        vector<vector<Point>> contours;
-        vector<vector<Point>> hierachy;
-        cv2.findContours(thresh, contours, hierarchy, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE);
+        gray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+        thresh = imgDiff(gray);
+        
+        lastimg = gray;
+        
+        ################################################ TO VECTORS #####################################################
+        
+        #vector<vector<Point>> contours;
         
         #print to screen
-        cv2.imshow("show", image)
-        lastimg = gray;
-        cv2.waitKey(30)
-        
-        
-
-
-
-
-
-#Save the result image
-#cv2.imwrite('result.jpg',image)
+        cv2.imshow("show", thresh)
+        cv2.imshow("showReal", image)
+        cv2.waitKey(5)
