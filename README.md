@@ -6,7 +6,8 @@ Raspberry Fahrzeugzählung GitHub rep
 Das Projekt zählt Fahrzeuge, und unterscheidet davon zwischen LKW und PKW. Diese Daten werden dann auf einer Benutzeroberfläche ausgegeben. 
 
 ## **Status Update:**
-Das 2. Status Update ist nun verfügbar! (*AVA_StatusUpdate_2.pdf*)
+Das 3. Status Update ist nun verfügbar! (*AVA_StatusUpdate_3.pdf*)
+Update Abgabetermin: 17.06.2021
 
 ## **Die Ziele des Projektes:**
 *	Zählen von Fahrzeugen mithilfe einer Kamera
