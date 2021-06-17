@@ -4,7 +4,8 @@ import cv2
 import numpy
 
 #Load a cascade file for detecting faces
-face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_alt.xml')
+
+lastimg = 0;
 
 
 while True:
@@ -28,19 +29,24 @@ while True:
         #Convert to grayscale
         gray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
 
-        #Look for faces in the image using the loaded cascade file
-        faces = face_cascade.detectMultiScale(gray, 1.1, 5)
-
-        #print "Found " + str(len(faces)) + " face(s)"
-
-        #Draw a rectangle around every found face
-        for (x,y,w,h) in faces:
-            cv2.rectangle(image,(x,y),(x+w,y+h),(255,255,0),2)
-
-        #cv2.destroyAllWindows() 
-            
+        #Convert to update of Image
+        diff = 0;
+        diff = cv2.absdiff(gray, lastimg, diff);
+        
+        #Make the difference bigger (0 or 255);
+        thresh = 0;
+        cv2.threshold(diff, thresh, 0, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU);
+    
+        #Claculate Vectors
+        vector<vector<Point>> contours;
+        vector<vector<Point>> hierachy;
+        cv2.findContours(thresh, contours, hierarchy, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE);
+        
+        #print to screen
         cv2.imshow("show", image)
+        lastimg = gray;
         cv2.waitKey(30)
+        
         
 
 
