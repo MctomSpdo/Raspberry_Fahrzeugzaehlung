@@ -94,4 +94,27 @@ const actions = [
 
 // <block:config:1>
 const config = {
-  
+  type: 'line',
+  data: data,
+  options: {
+    plugins: {
+      filler: {
+        propagate: false,
+      },
+      title: {
+        display: true,
+        text: (ctx) => 'Fill: ' + ctx.chart.data.datasets[0].fill
+      }
+    },
+    interaction: {
+      intersect: false,
+    }
+  },
+};
+// </block:config>
+
+module.exports = {
+  actions: actions,
+  config: config,
+};
+```
