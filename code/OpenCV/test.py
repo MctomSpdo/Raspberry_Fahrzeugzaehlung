@@ -4,10 +4,20 @@ import cv2
 import numpy
 
 #Load a cascade file for detecting faces
-face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_alt.xml')
 
+lastimg = 0;
 
-while True:
+#return the difference between the image and the last Image
+def imgDiff(image):
+        diff = 0;
+        diff = cv2.absdiff(gray, lastimg, diff);
+        
+        ret, thresh = cv2.threshold(diff, 30, 255, cv2.THRESH_BINARY_INV)
+        
+        return thresh;
+    
+#makes an Image from the camera
+def getImg():
         #Create a memory stream so photos doesn't need to be saved in a file
         stream = io.BytesIO()
 
@@ -21,31 +31,27 @@ while True:
 
         #Now creates an OpenCV image
         image = cv2.imdecode(buff, 1)
+        return image;
 
+#roatetes the Image by 180 degrees
+def rotate180(image):
         image = cv2.rotate(image, cv2.ROTATE_90_CLOCKWISE)
         image = cv2.rotate(image, cv2.ROTATE_90_CLOCKWISE)
+        return image
 
-        #Convert to grayscale
-        gray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
-
-        #Look for faces in the image using the loaded cascade file
-        faces = face_cascade.detectMultiScale(gray, 1.1, 5)
-
-        #print "Found " + str(len(faces)) + " face(s)"
-
-        #Draw a rectangle around every found face
-        for (x,y,w,h) in faces:
-            cv2.rectangle(image,(x,y),(x+w,y+h),(255,255,0),2)
-
-        #cv2.destroyAllWindows() 
-            
-        cv2.imshow("show", image)
-        cv2.waitKey(30)
+while True:
+        image = rotate180(getImg());
         
-
-
-
-
-
-#Save the result image
-#cv2.imwrite('result.jpg',image)
+        gray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+        thresh = imgDiff(gray);
+        
+        lastimg = gray;
+        
+        ################################################ TO VECTORS #####################################################
+        
+        #vector<vector<Point>> contours;
+        
+        #print to screen
+        cv2.imshow("show", thresh)
+        cv2.imshow("showReal", image)
+        cv2.waitKey(5)
