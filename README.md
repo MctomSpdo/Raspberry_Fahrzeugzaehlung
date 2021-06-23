@@ -48,6 +48,9 @@ Bis 18.3	Raspberry einrichten
 |   Setup     |Raspberry aufsetzen, Beginn Webserver/site |
 |   OpenCV    |   OpenCV installieren, Phyhton aufsetzen  |
 |  WebServer  |              ChartJS, NodeJS              |
+|   OpenCV    |           Beginn der Entwicklungen        |
+|   WebDev    |           Beginn der Entwicklungen        |
+| Status reports|           1 - 4 Status Report           |
 	
 
 [Github repo](https://github.com/MctomSpdo/Raspberry_Fahrzeugzaehlung)
