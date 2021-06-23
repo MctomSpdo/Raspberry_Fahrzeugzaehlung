@@ -6,8 +6,8 @@ Raspberry Fahrzeugzählung GitHub rep
 Das Projekt zählt Fahrzeuge, und unterscheidet davon zwischen LKW und PKW. Diese Daten werden dann auf einer Benutzeroberfläche ausgegeben. 
 
 ## **Status Update:**
-Das 3. Status Update ist nun verfügbar! (*AVA_StatusUpdate_3.pdf*)
-Update Abgabetermin: 17.06.2021
+Das 4. Status Update ist nun verfügbar! (*AVA_StatusUpdate_3.pdf*)
+Update Abgabetermin: 24.06.2021
 
 ## **Die Ziele des Projektes:**
 *	Zählen von Fahrzeugen mithilfe einer Kamera
@@ -26,13 +26,13 @@ Update Abgabetermin: 17.06.2021
  ### **Software:** 
 *	Raspberry Pi Os / Linux / Docker
 *	OpenCv
-*	Java Framework (highChart of chartJS)
+*	JavaScript Framework (highChart of chartJS)
 *	Docker
-*	(JavaScript (NodeJS))
+*	NodeJS
 *	Html / Css
 ## **Teamszusammensetzung:**
 *	Teamleitung: Sebastian Toldo
-* Mitglieder: Paul Schicklgruber, Thomas Spindler, Boris Ballada
+* Mitglieder: Paul Schicklgruber, Thomas Spindler, ~~Boris Ballada~~
 ## **Zeitplan:** 
 Bis 18.3	Raspberry einrichten 
 24.3- Abgabe	Beginn des Developments
