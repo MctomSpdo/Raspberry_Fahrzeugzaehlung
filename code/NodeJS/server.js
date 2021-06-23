@@ -5,7 +5,11 @@ const fs = require('fs');
 
 const app = express();
 const port = 3000; //default WebPort
+<<<<<<< HEAD
+    
+=======
 
+>>>>>>> 75c31a376bccb347dd959b542eeb04328fa53f57
 app.use(express.static('public-root/webserver-root'), express.urlencoded({extended: true}));
 
 app.listen(port, () => {
