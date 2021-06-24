@@ -2,6 +2,9 @@ import io
 import picamera
 import cv2
 import numpy
+import requests as req
+import os
+import threading as thread
 
 #the Dimentions of the captured Image
 IMG_HEIGHT = 640
@@ -10,61 +13,65 @@ IMG_WIDTH = 480
 VECSIZE = IMG_HEIGHT / 40;
 #the amount of calcsquares to use
 CROPSIZE = 20;
+LINK = "http://localhost:3000"
 
 
 lastimg = 0;
 
 #return the difference between the image and the last Image
 def imgDiff(image):
-        diff = 0;
-        diff = cv2.absdiff(gray, lastimg, diff);
+    diff = 0;
+    diff = cv2.absdiff(gray, lastimg, diff);
         
-        ret, thresh = cv2.threshold(diff, 50, 255, cv2.THRESH_BINARY)
+    ret, thresh = cv2.threshold(diff, 50, 255, cv2.THRESH_BINARY)
         
-        return thresh;
+    return thresh;
     
 #makes an Image from the camera
 def getImg():
-        #Create a memory stream so photos doesn't need to be saved in a file
-        stream = io.BytesIO()
+    #Create a memory stream so photos doesn't need to be saved in a file
+    stream = io.BytesIO()
 
-        #Get the picture (low resolution, so it should be quite fast)
-        #Here you can also specify other parameters (e.g.:rotate the image)
-        with picamera.PiCamera() as camera:
-                camera.resolution = (IMG_HEIGHT, IMG_WIDTH)
-                camera.capture(stream, format='jpeg')
-        #Convert the picture into a numpy array
-        buff = numpy.frombuffer(stream.getvalue(), dtype=numpy.uint8)
+    #Get the picture (low resolution, so it should be quite fast)
+    #Here you can also specify other parameters (e.g.:rotate the image)
+    with picamera.PiCamera() as camera:
+        camera.resolution = (IMG_HEIGHT, IMG_WIDTH)
+        camera.capture(stream, format='jpeg')
+    #Convert the picture into a numpy array
+    buff = numpy.frombuffer(stream.getvalue(), dtype=numpy.uint8)
 
-        #Now creates an OpenCV image
-        image = cv2.imdecode(buff, 1)
-        return image;
+    #Now creates an OpenCV image
+    image = cv2.imdecode(buff, 1)
+    return image;
 
 #roatetes the Image by 180 degrees
 def rotate180(image):
-        image = cv2.rotate(image, cv2.ROTATE_180)
-        return image
+    image = cv2.rotate(image, cv2.ROTATE_180)
+    return image
+    
+def grayScale(img):
+    return cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 
 #displays the Image in a Window
 def displayImg(title, img):
-        cv2.imshow(title, img);
+    cv2.imshow(title, img);
         
 #OUTDATED: Used to draw the rects around the changes (new method used)
 def drawChange(cnt):
-        M = cv2.moments(cnt)
-        area = cv2.contourArea(cnt)
-        perimeter = cv2.arcLength(cnt,True)
-        epsilon = 0.1 * perimeter
-        approx = cv2.approxPolyDP(cnt,epsilon,True)
-        hull = cv2.convexHull(cnt)
+    M = cv2.moments(cnt)
+    area = cv2.contourArea(cnt)
+    perimeter = cv2.arcLength(cnt,True)
+    epsilon = 0.1 * perimeter
+    approx = cv2.approxPolyDP(cnt,epsilon,True)
+    hull = cv2.convexHull(cnt)
         
-        x, y, w, h = cv2.boundingRect(cnt)
-        #if rectange is tinier than a certain size, don't display
-        if(w<VECSIZE):
-            return
-        if(h<VECSIZE):
-            return
-        cv2.rectangle(image,(x,y),(x+w,y+h),(0,0,255),2)
+    x, y, w, h = cv2.boundingRect(cnt)
+    #if rectange is tinier than a certain size, don't display
+    if(w<VECSIZE):
+        return
+    if(h<VECSIZE):
+        return
+    cv2.rectangle(image,(x,y),(x+w,y+h),(0,0,255),2)
     
 #crops the Image to a certain area given
 def crop(y, x, height, width, img):
@@ -124,20 +131,56 @@ def drawCrops(crops, image):
             col = int(crops[i][j] * 2.4);
             cv2.rectangle(image,(x,y),(x+h,y+w),(col,col,col),2)
 
+def getReq(link):
+    x = req.get(link)
+    #print(x.status_code)
+    return x.text
+
+def postReq(link, data):
+    y = req.post(link, data);
+    #print(x.status_code)
+    return y.text
+
+def intervall(func, sec):
+    def func_wrapper():
+        intervall(func, sec)
+        func()
+    t = thread.Timer(sec, func_wrapper)
+    t.start()
+    return t
+
+
+def getCPUTemp():
+    results = 0.0
+    if os.path.isfile('/sys/class/thermal/thermal_zone0/temp'):
+        with open('/sys/class/thermal/thermal_zone0/temp') as f:
+            line = f.readline().strip()
+        if line.isdigit():
+            result = float(line) / 1000
+    return result
+
+def sendCPUTemp():
+    temp = getCPUTemp()
+    send = {"cputemp" : temp}
+    print(send)
+    postReq(LINK + "/API/send/hw-stats", send)
+
 #while loop for the image input stream (frame by frame
+#sendCPUTemp()
+#intervall(sendCPUTemp, 10)
 while True:
-        image = rotate180(getImg());
-        gray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
-        
-        thresh = imgDiff(gray);
-            
-        ################################################ TO VECTORS #####################################################        
-        crops = getCrops(thresh)
-        percent = cropsToProcent(crops)
-        drawCrops(percent, image)
+    image = rotate180(getImg());
+    gray = grayScale(image)
+    thresh = imgDiff(gray);
+
+    ################################################ TO VECTORS #####################################################        
+    crops = getCrops(thresh)
+    percent = cropsToProcent(crops)
+    drawCrops(percent, image)
                  
-        #print to screen
-        displayImg("processing", thresh)
-        displayImg("show", image)
-        lastimg = gray;
-        cv2.waitKey(2)
+    #print to screen
+    displayImg("processing", thresh)
+    displayImg("show", image)
+    lastimg = gray;
+    cv2.waitKey(2)
+#CPU Temp report to the Server:
