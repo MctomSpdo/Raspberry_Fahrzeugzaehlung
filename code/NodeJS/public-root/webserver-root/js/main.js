@@ -1,7 +1,7 @@
 //Fetch zum Empfangen der gezählten Daten
  let auto = [];
  let lkw =[];
-
+let daten;
 
 
 function request() {
@@ -13,6 +13,7 @@ function request() {
 
     .then((data) => {
       console.log(data);
+      this.daten = data;
     })
     .catch((error) => {
       console.log('Error:', error);
@@ -20,9 +21,9 @@ function request() {
 }
 setInterval(() => {
   request();
-  auto.push(data.auto);
-  lkw.push(data.lkw);
-  console.log('noice');
+  auto.push(daten.auto);
+  lkw.push(daten.lkw);
+  console.log('test bestanden ');
 }, 1000);
 
 
