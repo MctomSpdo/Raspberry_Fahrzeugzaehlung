@@ -19,7 +19,7 @@ def imgDiff(image):
         diff = 0;
         diff = cv2.absdiff(gray, lastimg, diff);
         
-        ret, thresh = cv2.threshold(diff, 30, 255, cv2.THRESH_BINARY)
+        ret, thresh = cv2.threshold(diff, 50, 255, cv2.THRESH_BINARY)
         
         return thresh;
     
@@ -140,4 +140,4 @@ while True:
         displayImg("processing", thresh)
         displayImg("show", image)
         lastimg = gray;
-        cv2.waitKey(5)
+        cv2.waitKey(2)
