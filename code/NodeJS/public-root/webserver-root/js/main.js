@@ -1,19 +1,34 @@
 //Fetch zum Empfangen der gezählten Daten
+ let auto = [];
+ let lkw =[];
 
-fetch('http://localhost:3000/')
-.then ((response) =>{
-  return response.json();
-})
-.then((data)=>{
-  console.log(data);
-})
-.catch((error) =>{
-  console.log('Error:', error);
-})
 
- //Versuch einer Datumsanzeige
- /*let date = new Date();
- let day = date.getDate();
+
+function request() {
+
+  fetch('http://localhost:3000/')
+    .then((response) => {
+      return response.json();
+    })
+
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((error) => {
+      console.log('Error:', error);
+    })
+}
+setInterval(() => {
+  request();
+  auto.push(data.auto);
+  lkw.push(data.lkw);
+  console.log('noice');
+}, 1000);
+
+
+//Versuch einer Datumsanzeige
+/*let date = new Date();
+let day = date.getDate();
 let month = date.getMonth();
 let year = date.getFullYear();
 */
@@ -57,12 +72,12 @@ let data1 = {
     label: 'Auto',
     backgroundColor: 'rgb(255, 99, 132)',
     borderColor: 'rgb(255, 99, 132)',
-    data: [0, 10, 5, 2, 20, 30, 45],
+    data: [auto],
   }, {
     label: 'LKW ',
     backgroundColor: 'rgb(30,30,30)',
     borderColor: 'rgb(30, 30, 30)',
-    data: [15, 9, 4, 3, 19, 27, 33],
+    data: [lkw],
   }]
 };
 
@@ -154,24 +169,24 @@ let data7 = {
 //Verzögertes Laden der Charts
 chart(data1);
 
-setTimeout( ()=> {
+setTimeout(() => {
   chart(data2);
- }, 1000)
- setTimeout( ()=> {
+}, 1000)
+setTimeout(() => {
   chart(data3);
- }, 2000)
- setTimeout( ()=> {
+}, 2000)
+setTimeout(() => {
   chart(data4);
- }, 3000)
- setTimeout( ()=> {
+}, 3000)
+setTimeout(() => {
   chart(data5);
- }, 4000)
- setTimeout( ()=> {
+}, 4000)
+setTimeout(() => {
   chart(data6);
- }, 5000)
- setTimeout( ()=> {
+}, 5000)
+setTimeout(() => {
   chart(data7);
- }, 6000)
+}, 6000)
 
 
 
@@ -180,37 +195,37 @@ function chart(data) {
   i++;
   let d = new Date();
   let n = d.toLocaleTimeString();
- 
 
- 
+
+
 
   let config = {
     type: 'line',
     data,
-    
-      };
-      
-  
 
- //Verusch einer Datumsanzeige
+  };
+
+
+
+  //Verusch einer Datumsanzeige
 
   //document.getElementsByClassName(`date${i}`).innerHTML += `${day} ${month} ${year}`;
   //document.getElementsByClassName(`date${i}`).style.color = "#ff0000";
 
-   document.getElementById(i).innerHTML += `<canvas id="myChart${i}"></canvas>`;
-   
+  document.getElementById(i).innerHTML += `<canvas id="myChart${i}"></canvas>`;
 
-   console.log(i);
-   console.log(document.getElementById(`myChart${i}`))
-  
 
-   setTimeout( ()=> {
+  console.log(i);
+  console.log(document.getElementById(`myChart${i}`))
+
+
+  setTimeout(() => {
     new Chart(
       document.getElementById(`myChart${i}`),
       config
-   );
-   }, 500)
-  
+    );
+  }, 500)
 
- 
+
+
 } 
